@@ -1,0 +1,49 @@
+{%extends 'layout.html'%}
+
+{%block content%}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-12">
+            <h1>Add Todo</h1>
+            <form action="/add-todo" method="POST">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" class="form-control border border-primary" id="title" name="title">
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+            <hr>
+            <h2>Todo List</h2>
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for todo in todos %}
+                    <tr>
+                        <td>{{ todo[0] }}</td>
+                        <td>{{ todo[2] }}</td>
+                        <td>{{ todo[3] }}</td>
+                        <td>
+                            <a href="/updater/{{ todo[0] }}" class="btn btn-primary">Edit</a>
+                            <a href="/delete-todo/{{ todo[0] }}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{%endblock%}
